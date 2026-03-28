@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社团招新智能匹配平台</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo" onclick="navigateTo('home')">
+        <span class="logo-icon">🎯</span>
+        <span>社团招新匹配平台</span>
+      </div>
+      <nav class="nav-menu">
+        <a href="#home" class="nav-item active" data-page="home">首页</a>
+        <a href="#clubs" class="nav-item" data-page="clubs">社团广场</a>
+        <a href="#questionnaire" class="nav-item" data-page="questionnaire">智能匹配</a>
+        <a href="#center" class="nav-item" data-page="center">我的中心</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- 首页 -->
+    <section id="page-home" class="page active">
+      <div class="hero">
+        <h1>找到属于你的社团</h1>
+        <p>基于兴趣、性格、专业和时间，智能为你推荐最适合的社团</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="navigateTo('questionnaire')">开始智能匹配</button>
+          <button class="btn btn-secondary" onclick="navigateTo('clubs')">浏览全部社团</button>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>智能匹配</h3>
+          <p>通过问卷分析，为你精准推荐最适合的社团</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>多维分析</h3>
+          <p>综合考虑兴趣、性格、专业和时间安排</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3>轻松报名</h3>
+          <p>一键报名，快速加入心仪社团</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💫</div>
+          <h3>个性化收藏</h3>
+          <p>收藏感兴趣的社团，不错过任何一个机会</p>
+        </div>
+      </div>
+
+      <div class="popular-clubs">
+        <h2 class="section-title">热门社团</h2>
+        <div class="club-grid" id="popular-clubs"></div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">12+</div>
+          <div class="stat-label">精品社团</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1500+</div>
+          <div class="stat-label">活跃成员</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">匹配满意度</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">年度活动</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 社团广场 -->
+    <section id="page-clubs" class="page">
+      <div class="page-header">
+        <h1>社团广场</h1>
+        <p>浏览所有社团，发现你的兴趣所在</p>
+      </div>
+
+      <div class="filters card">
+        <div class="filter-row">
+          <input type="text" id="search-input" class="search-input" placeholder="搜索社团名称...">
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">类别:</span>
+          <div class="category-buttons">
+            <button class="category-btn active" data-category="">全部</button>
+            <button class="category-btn" data-category="科技">科技</button>
+            <button class="category-btn" data-category="文艺">文艺</button>
+            <button class="category-btn" data-category="体育">体育</button>
+            <button class="category-btn" data-category="公益">公益</button>
+            <button class="category-btn" data-category="学术">学术</button>
+            <button class="category-btn" data-category="实践">实践</button>
+            <button class="category-btn" data-category="兴趣">兴趣</button>
+            <button class="category-btn" data-category="益智">益智</button>
+          </div>
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">排序:</span>
+          <select id="sort-select" class="sort-select">
+            <option value="default">综合排序</option>
+            <option value="members">成员最多</option>
+            <option value="recruit">招募人数</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="club-grid" id="all-clubs"></div>
+      <div id="no-results" class="no-results" style="display: none;">
+        <p>未找到符合条件的社团</p>
+      </div>
+    </section>
+
+    <!-- 社团详情 -->
+    <section id="page-club-detail" class="page">
+      <div class="club-detail" id="club-detail-content"></div>
+    </section>
+
+    <!-- 智能匹配问卷 -->
+    <section id="page-questionnaire" class="page">
+      <div class="progress-bar card">
+        <div class="step active" data-step="0">
+          <div class="step-number">1</div>
+          <div class="step-label">基本信息</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="1">
+          <div class="step-number">2</div>
+          <div class="step-label">兴趣选择</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2">
+          <div class="step-number">3</div>
+          <div class="step-label">性格测试</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3">
+          <div class="step-number">4</div>
+          <div class="step-label">时间安排</div>
+        </div>
+      </div>
+
+      <div class="questionnaire-card card" id="questionnaire-content"></div>
+    </section>
+
+    <!-- 匹配结果 -->
+    <section id="page-results" class="page">
+      <div class="results-header card">
+        <h1>为你推荐以下社团</h1>
+        <p>基于你的兴趣、性格、专业和时间安排，我们为你匹配了最合适的社团</p>
+      </div>
+
+      <div class="match-results" id="match-results"></div>
+
+      <div class="action-bar card">
+        <button class="btn btn-secondary" onclick="navigateTo('questionnaire')">重新匹配</button>
+        <button class="btn btn-primary" onclick="navigateTo('clubs')">浏览更多社团</button>
+      </div>
+    </section>
+
+    <!-- 我的中心 -->
+    <section id="page-center" class="page">
+      <div class="center-header card">
+        <div class="user-info">
+          <div class="avatar" id="user-avatar">?</div>
+          <div class="info-text">
+            <h2 id="user-name">未登录用户</h2>
+            <p id="user-detail"></p>
+          </div>
+        </div>
+        <button class="btn btn-secondary" onclick="navigateTo('questionnaire')">重新匹配</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="applications">我的报名</button>
+        <button class="tab-btn" data-tab="favorites">我的收藏</button>
+        <button class="tab-btn" data-tab="history">匹配记录</button>
+      </div>
+
+      <div id="tab-applications" class="tab-content active">
+        <div id="applications-list"></div>
+      </div>
+      <div id="tab-favorites" class="tab-content">
+        <div id="favorites-list"></div>
+      </div>
+      <div id="tab-history" class="tab-content">
+        <div id="history-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 大学社团招新智能匹配平台 - 让每个学生找到属于自己的社团</p>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
